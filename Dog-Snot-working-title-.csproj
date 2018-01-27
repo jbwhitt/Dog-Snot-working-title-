@@ -284,11 +284,13 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Bullet.cs" />
     <Compile Include="Assets\Scripts\ButtonManager.cs" />
+    <Compile Include="Assets\Scripts\Controller2D.cs" />
     <Compile Include="Assets\Scripts\P1_Health.cs" />
     <Compile Include="Assets\Scripts\P1_Projectile.cs" />
     <Compile Include="Assets\Scripts\P1PlayerController.cs" />
     <Compile Include="Assets\Scripts\P2_Health.cs" />
     <Compile Include="Assets\Scripts\P2_Projectile.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Player1.cs" />
     <Compile Include="Assets\Scripts\Player2.cs" />
     <Compile Include="Assets\Scripts\ShootingController.cs" />
