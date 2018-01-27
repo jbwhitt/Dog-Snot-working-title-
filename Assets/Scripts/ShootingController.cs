@@ -16,8 +16,13 @@ public class ShootingController : MonoBehaviour
     }
 
     public GameObject playerHead; //Reference to sprite head
-    public float rotationSpeed = 50f;
-    public float bulletSpeed = 250f;
+
+    Vector3 defaultHeadSize; //Will store default head sprite size for scaling
+    public float rotationSpeed = 50f; //How fast head can tilt
+    public float bulletSpeed = 250f; //Speed of bullet
+    public float chargeRate = 1000f; //How quickly bulletspeed scales when charging
+    public float maxFireRate = 2f; //
+    public float fireRate = 2f;
 
     // Use this for initialization
     void Start()
@@ -28,6 +33,11 @@ public class ShootingController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(fireRate < maxFireRate) //Refills fireRate, when full you can shoot again
+        {
+            fireRate += Time.deltaTime;
+        }
+
         if (Input.GetKey(KeyCode.W))
         {
             RotateLeft();
@@ -40,7 +50,21 @@ public class ShootingController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            defaultHeadSize = playerHead.transform.localScale;
+        }
+
+        if (Input.GetKey(KeyCode.Space) && fireRate >= maxFireRate)
+        {
+            bulletSpeed += chargeRate;
+            //playerHead.transform.localScale += new Vector3(0.005f, 0.005f, 0.005f);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space) && fireRate >= maxFireRate)
+        {
             Shoot();
+            bulletSpeed = 250f;
+            playerHead.transform.localScale = defaultHeadSize;
+            fireRate = 0;
         }
     }
 
