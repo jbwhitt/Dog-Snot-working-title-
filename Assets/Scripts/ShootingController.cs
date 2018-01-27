@@ -18,11 +18,14 @@ public class ShootingController : MonoBehaviour
     public GameObject playerHead; //Reference to sprite head
 
     Vector3 defaultHeadSize; //Will store default head sprite size for scaling
-    public float rotationSpeed = 50f; //How fast head can tilt
+    Vector3 defaultHeadPos; //Will store default head sprite position for scaling
+
+    public float rotationSpeed = 100f; //How fast head can tilt
     public float bulletSpeed = 250f; //Speed of bullet
+    public float maxBulletSpeed = 1000f;
     public float chargeRate = 1000f; //How quickly bulletspeed scales when charging
-    public float maxFireRate = 2f; //
-    public float fireRate = 2f;
+    public float maxFireRate = 1.2f; //
+    public float fireRate = 1.2f;
 
     // Use this for initialization
     void Start()
@@ -51,12 +54,14 @@ public class ShootingController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             defaultHeadSize = playerHead.transform.localScale;
+            defaultHeadPos = playerHead.transform.position;
         }
 
-        if (Input.GetKey(KeyCode.Space) && fireRate >= maxFireRate)
+        if (Input.GetKey(KeyCode.Space) && fireRate >= maxFireRate && bulletSpeed <= maxBulletSpeed)
         {
             bulletSpeed += chargeRate;
-            //playerHead.transform.localScale += new Vector3(0.005f, 0.005f, 0.005f);
+            playerHead.transform.localScale += new Vector3(0.003f, 0.003f, 0.003f);
+            playerHead.transform.position += new Vector3(Random.Range(-0.007f, 0.007f), Random.Range(-0.007f, 0.007f), 0);
         }
 
         if (Input.GetKeyUp(KeyCode.Space) && fireRate >= maxFireRate)
@@ -64,6 +69,7 @@ public class ShootingController : MonoBehaviour
             Shoot();
             bulletSpeed = 250f;
             playerHead.transform.localScale = defaultHeadSize;
+            playerHead.transform.position = defaultHeadPos;
             fireRate = 0;
         }
     }
@@ -73,7 +79,7 @@ public class ShootingController : MonoBehaviour
         Vector3 currentRotation = playerHead.transform.localEulerAngles; //Gets the head's current rotation value
         if (currentRotation.z >= 85f)
         {
-            currentRotation.z -= 2f;
+            currentRotation.z = 85f;
         }
         else
         {
@@ -87,7 +93,7 @@ public class ShootingController : MonoBehaviour
         Vector3 currentRotation = playerHead.transform.localEulerAngles; //Gets the head's current rotation value
         if (currentRotation.z <= 1f)
         {
-            currentRotation.z += 2f;
+            currentRotation.z = 0f;
         }
         else
         {
