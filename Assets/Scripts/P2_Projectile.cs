@@ -6,7 +6,7 @@ public class P2_Projectile : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Player 2")
+        if (collision.gameObject.tag == "Player")
         {
             Debug.Log("Hit it. Fade it. Gone");
             Destroy(this.gameObject);

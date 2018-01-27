@@ -282,6 +282,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\P1PlayerController.cs" />
     <Compile Include="Assets\Scripts\P1_Health.cs" />
     <Compile Include="Assets\Scripts\P1_Projectile.cs" />
     <Compile Include="Assets\Scripts\P2_Health.cs" />

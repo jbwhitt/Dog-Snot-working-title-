@@ -6,6 +6,8 @@ TagManager:
   tags:
   - projectile
   - Player 2
+  - P2_shield
+  - P1_shield
   layers:
   - Default
   - TransparentFX
